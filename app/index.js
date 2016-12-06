@@ -6,6 +6,7 @@ import {store} from './store/store';
 import {Provider} from 'react-redux';
 
 import './styles/styles.css';
+import './styles/slider-styles.css';
 
 ReactDOM.render(
     <Provider store={store}>

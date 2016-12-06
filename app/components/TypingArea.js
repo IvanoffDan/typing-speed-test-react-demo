@@ -6,7 +6,7 @@ class TypingArea extends React.Component {
 
         this.state = {
             value: '',
-            toggleBackground: false
+            typingAreaClass: "correct-input"
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -16,11 +16,11 @@ class TypingArea extends React.Component {
         let typedText = event.target.value;
         this.setState(
             this.props.onTyping(typedText) ? {
-                    value: typedText,
-                    toggleBackground: false
-                } : {
+                value: typedText,
+                typingAreaClass: "correct-input"
+            } : {
                 value: typedText.slice(0, -1),
-                toggleBackground: true
+                typingAreaClass: "incorrect-input"
             }
         );
     }
@@ -28,13 +28,14 @@ class TypingArea extends React.Component {
     render() {
         return (
             <div>
-                <textarea name="typing-area"
+                <textarea className={this.state.typingAreaClass}
+                          name="typing-area"
                           id="typing-area"
                           cols="30" rows="10"
                           value={this.state.value}
                           placeholder="Start typing text from the form above when ready."
                           onChange={this.handleChange}
-                          ref="typing-area">
+                          ref="typingArea">
                 </textarea>
             </div>
         );
