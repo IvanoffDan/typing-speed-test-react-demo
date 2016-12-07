@@ -1,6 +1,6 @@
-import {TRY_LOGIN_SUCCESS} from '../actions/index';
+import {TRY_LOGIN_SUCCESS, CHECK_IF_LOGGEDIN_SUCCESS, TRY_LOGOUT_SUCCESS} from '../actions/index';
 
-const INITIAL_STATE = {username: "guest", loggedIn: false, bestResults: []};
+const INITIAL_STATE = {username: "", loggedIn: false, bestResults: []};
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
@@ -9,6 +9,14 @@ export default function (state = INITIAL_STATE, action) {
                 ...state,
                 loggedIn: true,
                 username: action.email
+            }
+        }
+
+        case TRY_LOGOUT_SUCCESS: {
+            return {
+                ...state,
+                loggedIn: false,
+                username: ""
             }
         }
 

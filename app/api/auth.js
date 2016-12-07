@@ -7,29 +7,32 @@ function login(data) {
 
         pretendRequest(email, pass).then((data) => {
                 localStorage.token = data.token;
+                localStorage.email = email;
                 resolve(true);
             }
-        ).catch((err)=>{
+        ).catch(() => {
+            console.log("about to reject!");
             reject(false);
         });
     })
 }
 
-function getToken() {
-    return localStorage.token
-}
+function logout() {
+    return new Promise((resolve) => {
+        setTimeout(()=>{
+            delete localStorage.token;
+            delete localStorage.email;
+            resolve(true);
+        }, 1000)
+    });
 
-function logout(cb) {
-    delete localStorage.token;
-    if (cb) cb();
-    this.onChange(false)
 }
 
 function loggedIn() {
-    return !!localStorage.token
+    return (localStorage.token && localStorage.email) ? {token: localStorage.token, email: localStorage.email} : false;
 }
 
-function pretendRequest(email, pass){
+function pretendRequest(email, pass) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if (email === 'test@example.com' && pass === '12345') {
@@ -48,7 +51,6 @@ module.exports = {
     login,
     loggedIn,
     pretendRequest,
-    logout,
-    getToken
+    logout
 };
 

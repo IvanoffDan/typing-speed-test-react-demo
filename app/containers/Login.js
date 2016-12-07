@@ -1,11 +1,27 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import {tryLogin} from '../actions/index';
+import {tryLogin, checkIfLoggedIn} from '../actions/index';
 
 class Login extends Component {
     constructor(props) {
         super(props)
+    }
+
+    static contextTypes = {
+        router: PropTypes.object
+    };
+
+    componentWillMount(){
+        this.props.checkIfLoggedIn();
+    }
+
+    shouldComponentUpdate(nextProps){
+        if (nextProps.loggedIn){
+            this.context.router.push('/main');
+            return false;
+        } else
+            return true;
     }
 
     handleSubmit(e) {
@@ -18,6 +34,11 @@ class Login extends Component {
     }
 
     render() {
+
+        if (this.props.loggedIn){
+            this.context.router.push('/main');
+        }
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit.bind(this)}>
@@ -54,4 +75,4 @@ function mapStateToProps(state){
     }
 }
 
-export default  connect(mapStateToProps, {tryLogin})(Login);
+export default  connect(mapStateToProps, {tryLogin, checkIfLoggedIn})(Login);

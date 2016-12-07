@@ -9,7 +9,7 @@ import auth from './api/auth';
 function checkAuth(nextState, replace){
     if (!auth.loggedIn()) {
         replace({
-            pathname: '/login',
+            pathname: '/',
             state: {nextPathname: nextState.location.pathname}
         })
     }
@@ -18,6 +18,6 @@ function checkAuth(nextState, replace){
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={Login}/>
-        <Route path="challenge" component={Main} onEnter={checkAuth}/>
+        <Route path="main" component={Main}  onEnter={checkAuth}/>
     </Route>
 );
