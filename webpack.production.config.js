@@ -13,8 +13,17 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({
             '$': 'jquery',
-            'jQuery': 'jquery'
-        })
+            'jQuery': 'jquery',
+            'window.Tether':'tether'
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin()
 
     ],
     output: {
@@ -32,5 +41,5 @@ module.exports = {
         root: __dirname,
         extensions: ['', '.js', '.jsx', '.css']
     },
-    devtool: 'inline-source-map'
+    devtool: 'cheap-module-source-map'
 };

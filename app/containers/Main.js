@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {fetchText, tryLogout, checkIfLoggedIn, setResult, clearText} from '../actions/index';
 import _ from 'lodash';
+import Spinner from 'react-spinkit';
 
 
 import TextArea from '../components/TextArea';
@@ -111,8 +112,8 @@ class Main extends Component {
     render() {
         if (this.state.loading) {
             return (
-                <div>
-                    Loading...
+                <div className="spinner-box">
+                    <Spinner spinnerName="rotating-plane" overrideSpinnerClassName="spinner" noFadeIn/>
                 </div>
             )
         } else if (this.state.completed) {
@@ -125,8 +126,8 @@ class Main extends Component {
             return (
                 <div>
                     <Header username={this.props.username} onLogout={this.handleLogout.bind(this)}/>
-                    <TextArea textToType={this.state.selectedText}/>
-                    <AvgSpeed avgSpeed={this.state.enteredLetters / this.state.elapsedSeconds * 60}/>
+                    <TextArea textToType={this.state.selectedText} typedLength={this.state.enteredLetters}/>
+                    <AvgSpeed avgSpeed={this.state.enteredLetters / (this.state.elapsedSeconds > 0 ? this.state.elapsedSeconds : 1 ) * 60}/>
                     <TypingArea onTyping={this.handleTypingAreaChange}/>
                 </div>
             )

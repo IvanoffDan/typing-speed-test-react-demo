@@ -28,7 +28,7 @@ class TypingArea extends React.Component {
     render() {
         return (
             <div>
-                <textarea className={this.state.typingAreaClass + "typing-area col-sm-8 offset-sm-2 col-xs-12"}
+                <textarea className={this.state.typingAreaClass + " typing-area col-lg-6 offset-lg-3 col-xs-12"}
                           name="typing-area"
                           id="typing-area"
                           cols="30" rows="10"

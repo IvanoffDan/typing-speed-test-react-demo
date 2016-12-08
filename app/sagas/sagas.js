@@ -18,8 +18,6 @@ export function* loadTexts() {
     try {
         const text = yield call(fetchText);
         yield put(fetchTextSucceeded(text));
-        /*let textIdToSelect = Math.floor((Math.random() * 3) + 1);
-        yield put(selectRandomText(texts[textIdToSelect]));*/
     } catch (err) {
         console.log(err);
     }

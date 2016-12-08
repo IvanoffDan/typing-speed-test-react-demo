@@ -1,15 +1,6 @@
-.container{
-/*    height: 100vh;
-    background-color: #f9f8f7;*/
-}
-
-
-
-/*-----LoginPage-----*/
-
 @import url(http://fonts.googleapis.com/css?family=Roboto);
 
-/****** LOGIN MODAL ******/
+/*-----Login-----*/
 
 .login-form{
     padding-top: 5rem;
@@ -111,9 +102,11 @@
 
 
 /*-----Main-----*/
+.completed{
+    padding-top: 5rem;
+}
 .completed p {
     color: #555;
-
     font-family: 'Alegreya Sans';
     font-size: 20px;
     font-weight: 400;
@@ -133,8 +126,6 @@
     max-width: 600px;
 }
 
-
-
 .text-to-type p {
     color: #555;
 
@@ -146,10 +137,12 @@
     /*max-width: 600px;*/
 }
 
-
+.text-to-highlight{
+    background-color: lightgreen;
+}
 
 .incorrect-input{
-    background-color: orangered;
+    background-color: lightpink;
 }
 
 .avg-speed{
@@ -157,6 +150,25 @@
     font-size: 2rem;
 }
 
+.spinner-box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3rem;
+}
+
+.spinner {
+    align-self: flex-start;
+}
+
+#try-again-button{
+    margin-top: 2rem;
+}
+
+#username{
+    padding-right: 1rem;
+}
 
 /*-----Bootstrap overrides-----*/
 
