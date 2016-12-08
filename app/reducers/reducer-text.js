@@ -1,18 +1,14 @@
-import {FETCH_TEXTS_SUCCEEDED, SELECT_RANDOM_TEXT} from '../actions/index';
-const INITIAL_STATE = {all: {}, selectedText: ""};
+import {FETCH_TEXT_SUCCEEDED, CLEAR_TEXT} from '../actions/index';
+const INITIAL_STATE = {};
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
-        case FETCH_TEXTS_SUCCEEDED:
-            return {
-                ...state,
-                all: {...action.texts}
-            };
-        case SELECT_RANDOM_TEXT:
-            return {
-                ...state,
-                selectedText: action.text
-            };
+        case FETCH_TEXT_SUCCEEDED:
+            return action.text;
+
+        case CLEAR_TEXT:
+            return INITIAL_STATE;
+
         default:
             return state;
     }

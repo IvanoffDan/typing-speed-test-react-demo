@@ -3,7 +3,7 @@ import TextReducer from './reducer-text';
 import UserReducer from './reducer-user';
 
 const rootReducer = combineReducers({
-    texts: TextReducer,
+    text: TextReducer,
     user: UserReducer
 });
 

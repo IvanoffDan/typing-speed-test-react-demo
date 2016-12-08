@@ -13,10 +13,12 @@ export default class Header extends React.Component {
 
     render() {
         return(
-            <div>
-                <p>Hello {this.props.username}!</p>
-                <button type="submit" onClick={this.onSubmit.bind(this)}>Log out</button>
+        <nav className="navbar navbar-light bg-faded">
+            <h1 className="navbar-brand mb-0">Typing Speed Test</h1>
+            <div className="float-xs-right">
+                <button className="btn btn-info" type="submit" onClick={this.onSubmit.bind(this)}>Log out</button>
             </div>
+        </nav>
         )
     }
 }

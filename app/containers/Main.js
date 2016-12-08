@@ -1,13 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {fetchTexts, tryLogout, checkIfLoggedIn} from '../actions/index';
+import {fetchText, tryLogout, checkIfLoggedIn, setResult, clearText} from '../actions/index';
 import _ from 'lodash';
 
 
 import TextArea from '../components/TextArea';
 import TypingArea from '../components/TypingArea';
 import AvgSpeed from '../components/AvgSpeed';
-import Completed from '../components/Completed';
 import Header from '../components/Header';
 
 const INITIAL_STATE = {
@@ -35,20 +34,24 @@ class Main extends Component {
 
     componentWillMount() {
         this.props.checkIfLoggedIn();
-        this.props.fetchTexts();
+    }
+
+    componentDidMount(){
+        this.props.fetchText();
     }
 
     componentWillUnmount() {
         clearInterval(this.timer);
         this.timer = undefined;
+        this.props.clearText();
     }
 
 
     componentWillReceiveProps(nextProps) {
-        if (!_.isEmpty(nextProps.texts)) {
-            let textIdToSelect = Math.floor((Math.random() * 3) + 1);
+
+        if (!_.isEmpty(nextProps.text)) {
             this.setState({
-                selectedText: nextProps.texts[textIdToSelect],
+                selectedText: nextProps.text,
                 loading: false
             });
         }
@@ -96,29 +99,13 @@ class Main extends Component {
     }
 
     handleLogout() {
-        this.setState(INITIAL_STATE);
-        console.log(this.state);
         this.props.tryLogout();
     }
 
-    handleTryAgain(){
-        this.setState({
-            completed: false
-        })
-    }
-
-
     handleCompletion() {
         let avgSpeed = this.state.enteredLetters / this.state.elapsedSeconds * 60;
-
-        clearInterval(this.timer);
-        this.timer = undefined;
-
-        return (
-            <div>
-                <Completed avgSpeed={avgSpeed} onTryAgain = {this.handleTryAgain.bind(this)}/>
-            </div>
-        )
+        this.props.setResult(avgSpeed);
+        this.context.router.push('/completed');
     }
 
     render() {
@@ -150,9 +137,9 @@ class Main extends Component {
 
 function mapStateToProps(state) {
     return {
-        texts: state.texts.all,
+        text: state.text,
         username: state.user.username
     }
 }
 
-export default connect(mapStateToProps, {fetchTexts, tryLogout, checkIfLoggedIn})(Main);
+export default connect(mapStateToProps, {fetchText, tryLogout, checkIfLoggedIn, setResult, clearText})(Main);

@@ -1,5 +1,7 @@
 import {createStore, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import {fork} from 'redux-saga/effects';
+
 
 import reducers from '../reducers';
 import {watchForLoadTexts, watchForLogin, watchForCheckLogin, watchForLogout} from '../sagas/sagas';
@@ -17,7 +19,9 @@ function configureStore(initialState) {
 
 export const store = configureStore();
 
-sagaMiddleware.run(watchForCheckLogin);
-sagaMiddleware.run(watchForLoadTexts);
-sagaMiddleware.run(watchForLogin);
-sagaMiddleware.run(watchForLogout);
+sagaMiddleware.run(function*() {
+    yield [fork(watchForCheckLogin),
+        fork(watchForLoadTexts),
+        fork(watchForLogin),
+        fork(watchForLogout)]
+});

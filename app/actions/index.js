@@ -1,6 +1,6 @@
-export const FETCH_TEXTS = 'FETCH_TEXTS';
-export const FETCH_TEXTS_SUCCEEDED = 'FETCH_TEXTS_SUCCEEDED';
-export const SELECT_RANDOM_TEXT = 'SELECT_RANDOM_TEXT';
+export const FETCH_TEXT = 'FETCH_TEXT';
+export const FETCH_TEXT_SUCCEEDED = 'FETCH_TEXT_SUCCEEDED';
+export const CLEAR_TEXT = 'CLEAR_TEXT';
 
 export const TRY_LOGIN = 'TRY_LOGIN';
 export const TRY_LOGOUT = 'TRY_LOGOUT';
@@ -9,30 +9,32 @@ export const TRY_LOGIN_FAILURE = 'TRY_LOGIN_FAILURE';
 export const CHECK_IF_LOGGEDIN = 'CHECK_IF_LOGGEDIN';
 export const CHECK_IF_LOGGEDIN_SUCCESS = 'CHECK_IF_LOGGEDIN_SUCCESS';
 export const TRY_LOGOUT_SUCCESS = 'TRY_LOGOUT_SUCCESS';
+export const SET_RESULT = 'SET_RESULT';
 
 
 /*----------------------Text Reducer-------------------*/
-export function fetchTexts() {
+export function fetchText() {
     return {
-        type: FETCH_TEXTS
+        type: FETCH_TEXT
     }
 }
 
-export function fetchTextsSucceeded(texts) {
+export function fetchTextSucceeded(text) {
     return {
-        type: FETCH_TEXTS_SUCCEEDED,
-        texts
-    }
-}
-
-export function selectRandomText(text) {
-    return {
-        type: SELECT_RANDOM_TEXT,
+        type: FETCH_TEXT_SUCCEEDED,
         text
     }
 }
 
-/*-----------------Auth Reducer----------------------------*/
+export function clearText() {
+    return {
+        type: CLEAR_TEXT
+    }
+}
+
+
+
+/*-----------------User Reducer----------------------------*/
 
 export function tryLogin(email, pass){
     return {
@@ -67,5 +69,12 @@ export function tryLogoutSuccess(){
     }
 }
 
+
+export function setResult(avgSpeed){
+    return {
+        type: SET_RESULT,
+        avgSpeed
+    }
+}
 
 

@@ -1,9 +1,11 @@
 import textPlaceholder from '../../collections/text-placeholder';
 
-export function fetchTexts() {
+export function fetchText() {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(textPlaceholder);
+            let textIdToSelect = Math.floor((Math.random() * 3) + 1);
+            console.log(textPlaceholder[textIdToSelect]);
+            resolve(textPlaceholder[textIdToSelect]);
         }, 3000)
     });
 }

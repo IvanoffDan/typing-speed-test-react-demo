@@ -12,12 +12,12 @@ class Login extends Component {
         router: PropTypes.object
     };
 
-    componentWillMount(){
+    componentWillMount() {
         this.props.checkIfLoggedIn();
     }
 
-    shouldComponentUpdate(nextProps){
-        if (nextProps.loggedIn){
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.loggedIn) {
             this.context.router.push('/main');
             return false;
         } else
@@ -35,41 +35,57 @@ class Login extends Component {
 
     render() {
 
-        if (this.props.loggedIn){
+        if (this.props.loggedIn) {
             this.context.router.push('/main');
         }
 
         return (
-            <div>
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">Email</label>
-                        <div className="col-sm-10">
-                            <input type="email" className="form-control" id="inputEmail3" placeholder="Email"
-                                   ref="email"/>
-                        </div>
-                    </div>
+            <div className="login-form" id="login-form">
+                <div className="loginmodal-container">
+                    <h1>Login to Your Account</h1><br/>
 
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">Password</label>
-                        <div className="col-sm-10">
-                            <input type="password" className="form-control" id="inputPassword3" placeholder="Password"
-                                   ref="pass"/>
-                        </div>
-                    </div>
-
-                    <div className="form-group row">
-                        <div className="offset-sm-2 col-sm-10">
-                            <button type="submit" className="btn btn-primary">Sign in</button>
-                        </div>
-                    </div>
-                </form>
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <input type="text" name="user" placeholder="Username" ref="email"/>
+                        <small id="emailHelp" className="form-text text-muted">Hint: test@example.com</small>
+                        <input type="password" name="pass" placeholder="Password" ref="pass"/>
+                        <small id="passHelp" className="form-text text-muted">Hint: 12345</small>
+                        <input type="submit" name="login" className="login loginmodal-submit" value="Login"/>
+                    </form>
+                </div>
             </div>
-        )
+        );
+
+        /*    return (
+         <div className="login">
+         <form className="login-form " onSubmit={this.handleSubmit.bind(this)}>
+         <div className="form-group row">
+         <label className="col-sm-2 col-form-label">Email</label>
+         <div className="col-sm-6">
+         <input type="email" className="form-control" id="inputEmail3" placeholder="Email"
+         ref="email"/>
+         </div>
+         </div>
+
+         <div className="form-group row">
+         <label className="col-sm-2 col-form-label">Password</label>
+         <div className="col-sm-6">
+         <input type="password" className="form-control" id="inputPassword3" placeholder="Password"
+         ref="pass"/>
+         </div>
+         </div>
+
+         <div className="form-group row">
+         <div className="offset-sm-2 col-sm-6">
+         <button type="submit" className="btn btn-primary">Sign in</button>
+         </div>
+         </div>
+         </form>
+         </div>
+         )*/
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         loggedIn: state.user.loggedIn
     }

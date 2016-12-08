@@ -1,7 +1,7 @@
-import {fetchTexts} from '../api/textApi';
+import {fetchText} from '../api/textApi';
 import {put, take, call} from 'redux-saga/effects';
 import {takeLatest} from 'redux-saga';
-import {fetchTextsSucceeded, selectRandomText, FETCH_TEXTS} from '../actions/index';
+import {fetchTextSucceeded, FETCH_TEXT} from '../actions/index';
 import {TRY_LOGIN, tryLoginSuccess, CHECK_IF_LOGGEDIN, TRY_LOGOUT, tryLogoutSuccess} from '../actions/index'
 import auth from '../api/auth';
 
@@ -9,15 +9,15 @@ import auth from '../api/auth';
 /*-----------------------TextLoading-----------------------------------------------*/
 export function* watchForLoadTexts() {
     while (true) {
-        yield take(FETCH_TEXTS);
+        yield take(FETCH_TEXT);
         yield loadTexts();
     }
 }
 
 export function* loadTexts() {
     try {
-        const texts = yield call(fetchTexts);
-        yield put(fetchTextsSucceeded(texts));
+        const text = yield call(fetchText);
+        yield put(fetchTextSucceeded(text));
         /*let textIdToSelect = Math.floor((Math.random() * 3) + 1);
         yield put(selectRandomText(texts[textIdToSelect]));*/
     } catch (err) {
