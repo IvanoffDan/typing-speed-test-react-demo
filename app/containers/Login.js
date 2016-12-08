@@ -42,10 +42,10 @@ class Login extends Component {
         return (
             <div className="login-form" id="login-form">
                 <div className="loginmodal-container">
-                    <h1>Login to Your Account</h1><br/>
+                    <h1>Typing Speed Test</h1><br/>
 
                     <form onSubmit={this.handleSubmit.bind(this)}>
-                        <input type="text" name="user" placeholder="Username" ref="email"/>
+                        <input type="text" name="user" placeholder="Email" ref="email"/>
                         <small id="emailHelp" className="form-text text-muted">Hint: test@example.com</small>
                         <input type="password" name="pass" placeholder="Password" ref="pass"/>
                         <small id="passHelp" className="form-text text-muted">Hint: 12345</small>
