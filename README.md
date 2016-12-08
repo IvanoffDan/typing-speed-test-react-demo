@@ -1,6 +1,6 @@
 # typing-speed-test-react-demo
 
-[Heroku link](https://tranquil-beach-34360.herokuapp.com)
+[Link to Heroku](https://tranquil-beach-34360.herokuapp.com)
 
 This is simple React/Redux app that allows you to measure your typing speed in Cps (characters per minute).
 
